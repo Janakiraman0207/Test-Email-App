@@ -1,0 +1,53 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.pycgit add .gitignore
+
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+# env/
+
+# =========================
+# Environment files
+# =========================
+# .env
+# .env.*
+# .env.local
+
+# =========================
+# Django / FastAPI
+# =========================
+db.sqlite3
+*.sqlite3
+
+# Media / Static
+media/
+static/
+staticfiles/
+
+# =========================
+# Testing / tooling
+# =========================
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Logs / Celery
+# =========================
+*.log
+celerybeat-schedule
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

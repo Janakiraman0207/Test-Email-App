@@ -1,0 +1,71 @@
+.phone-input .react-international-phone-input-container {
+  width: 362px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row;
+  gap: 9px;
+}
+
+.phone-input .react-international-phone-country-selector {
+  background-color: #f4f4f4;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+}
+
+.phone-input .react-international-phone-country-selector:hover {
+  background-color: transparent !important;
+}
+
+.phone-input .react-international-phone-country-selector button {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.phone-input .react-international-phone-country-selector-dropdown {
+  max-height: 100px !important;
+  overflow-y: auto !important;
+}
+
+.phone-input
+  .react-international-phone-country-selector-button__dropdown-arrow {
+  width: 20px;
+  height: 20px;
+  background: url("../../../assets/images/chevronblackdown.svg") center center
+    no-repeat !important;
+  background-size: contain !important;
+  transition: transform 0.2s ease-in-out;
+  border: none !important;
+  color: black !important;
+}
+
+.phone-input
+  .react-international-phone-country-selector-button--expanded
+  .react-international-phone-country-selector-button__dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.phone-input input.react-international-phone-input {
+  height: 72px;
+  width: 272px;
+  border-radius: 16px;
+  background: #f4f4f4;
+  border: 1px solid #f7f7f9;
+}
+
+.error-border {
+  border: 1px solid #F70027 !important;
+  background: #F4F4F4;
+  border-radius: 16px;
+  height: 72px;
+  padding-left: 48px;
+  font-size: 16px;
+  color: #000;
+  width: 100%;
+  transition: border 0.2s;
+}
