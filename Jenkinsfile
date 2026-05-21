@@ -1,4 +1,3 @@
-```groovy
 pipeline {
     agent any
 
@@ -42,16 +41,16 @@ pipeline {
                 sshagent([env.SSH_KEY]) {
                     sh """
                     rsync -avz --delete \
-                      --exclude='.git' \
-                      --exclude='node_modules' \
-                      --exclude='.ssh' \
-                      frontend/dist \
-                      django_backend \
-                      email_project \
-                      fastapi_app \
-                      manage.py \
-                      requirements.txt \
-                      ${DEPLOY_USER}@${DEPLOY_HOST}:${APP_DIR}
+                    --exclude='.git' \
+                    --exclude='node_modules' \
+                    --exclude='.ssh' \
+                    frontend/dist \
+                    django_backend \
+                    email_project \
+                    fastapi_app \
+                    manage.py \
+                    requirements.txt \
+                    ${DEPLOY_USER}@${DEPLOY_HOST}:${APP_DIR}
 
                     ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_HOST} '
                         cd ${APP_DIR}
@@ -97,4 +96,3 @@ pipeline {
         }
     }
 }
-```
