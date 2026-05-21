@@ -1,11 +1,11 @@
-```groovy id="w7n2qp"
+```groovy
 pipeline {
     agent any
 
     environment {
         GIT_CREDS  = 'github-token-emailapp'
         GIT_REPO   = 'https://github.com/Janakiraman0207/Test-Email-App.git'
-        GIT_BRANCH = 'main'
+        GIT_BRANCH = 'master'
 
         SSH_KEY     = 'deploy-ec2-key'
         DEPLOY_USER = 'ubuntu'
