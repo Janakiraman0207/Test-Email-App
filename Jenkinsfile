@@ -2,14 +2,14 @@ pipeline {
     agent any
 
     environment {
-        GIT_CREDS  = 'github-token-emailapp'
+        GIT_CREDS  = 'Git-email'
         GIT_REPO   = 'https://github.com/Janakiraman0207/Test-Email-App.git'
         GIT_BRANCH = 'master'
 
         SSH_KEY     = 'deploy-ec2-key'
         DEPLOY_USER = 'ubuntu'
-        DEPLOY_HOST = '3.110.213.30'
-        APP_DIR     = '/home/ubuntu/email-project'
+        DEPLOY_HOST = '172.31.41.212'
+        APP_DIR     = '/home/ubuntu/Test-Email-App'
     }
 
     stages {
@@ -36,7 +36,7 @@ pipeline {
             }
         }
 
-        stage('Deploy & Migrate') {
+        stage('Deploy Files') {
             steps {
                 sshagent([env.SSH_KEY]) {
                     sh """
@@ -44,14 +44,22 @@ pipeline {
                     --exclude='.git' \
                     --exclude='node_modules' \
                     --exclude='.ssh' \
-                    frontend/dist \
+                    frontend \
                     django_backend \
                     email_project \
                     fastapi_app \
                     manage.py \
                     requirements.txt \
                     ${DEPLOY_USER}@${DEPLOY_HOST}:${APP_DIR}
+                    """
+                }
+            }
+        }
 
+        stage('Install Dependencies & Migrate') {
+            steps {
+                sshagent([env.SSH_KEY]) {
+                    sh """
                     ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_HOST} '
                         cd ${APP_DIR}
 
@@ -66,6 +74,24 @@ pipeline {
                         pip install -r requirements.txt
 
                         python manage.py migrate --noinput
+                    '
+                    """
+                }
+            }
+        }
+
+        stage('Build Frontend In Slave') {
+            steps {
+                sshagent([env.SSH_KEY]) {
+                    sh """
+                    ssh -o StrictHostKeyChecking=no ${DEPLOY_USER}@${DEPLOY_HOST} '
+                        cd ${APP_DIR}/frontend
+
+                        npm install
+
+                        npm run build
+
+                        sudo cp -r dist/* /var/www/html/
                     '
                     """
                 }
